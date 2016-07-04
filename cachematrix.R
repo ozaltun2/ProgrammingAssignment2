@@ -1,24 +1,30 @@
-makeCacheMatrix <- function(x = matrix()) {
-    m <- NULL
+# The following functions are for Coursera Assignment 2.
+
+#This next function creates a special "matrix" object that can cache its inverse.
+makeCachematrix <- function(x = matrix()) {
+    i <- NULL
     set <- function(y) {
         x <<- y
-        m <<- NULL
+        i <<- NULL
     }
     get <- function() x
-    setmean <- function(mean) m <<- mean
-    getmean <- function() m
+    setinverse <- function(inverse) i <<- inverse
+    getinverse <- function() i
     list(set = set, get = get,
-    setmean = setmean,
-    getmean = getmean)
+    setinverse = setinverse,
+    getinverse = getinverse)
 }
+#This function computes the inverse of the special "matrix" returned by makeCacheMatrix above. If the inverse has already been calculated (and the matrix has not changed),
+#then cacheSolve should retrieve the inverse from the cache.
+
 cacheSolve <- function(x, ...) {
-    m <- x$getinv()
-    if(!is.null(m)) {
-        message("getting cached data")
-        return(m)
+    i <- x$getinverse()
+    if(!is.null(i)) {
+        iessage("getting cached data")
+        return(i)
     }
     data <- x$get()
-    m <- solve(data, ...)
-    x$setinv(m)
-    m
+    i <- solve(data)
+    x$setinverse(i)
+    i
 }
